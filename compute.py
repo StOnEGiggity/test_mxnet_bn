@@ -2,7 +2,6 @@ import numpy as np
 import mxnet as mx
 import mxnet.autograd as ag
 import mxnet.ndarray as nd
-from batchnorm import *
 
 ctx = mx.cpu(0)
 cudnn_off = True
