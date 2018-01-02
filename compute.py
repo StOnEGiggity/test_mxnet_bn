@@ -7,12 +7,12 @@ ctx = mx.cpu(0)
 cudnn_off = True
 
 data = mx.nd.load("./d.params")
-mmean = data['aux:bn2a_branch1_moving_mean'].reshape((1, 256, 1, 1))
-mvar = data['aux:bn2a_branch1_moving_var'].reshape((1, 256, 1, 1))
-beta = data['arg:bn2a_branch1_beta'].reshape((1, 256, 1, 1))
-gamma = data['arg:bn2a_branch1_gamma'].reshape((1, 256, 1, 1))
+mmean = data['aux:bn2a_branch1_moving_mean'].reshape((1, 256, 1, 1)).as_in_context(ctx)
+mvar = data['aux:bn2a_branch1_moving_var'].reshape((1, 256, 1, 1)).as_in_context(ctx)
+beta = data['arg:bn2a_branch1_beta'].reshape((1, 256, 1, 1)).as_in_context(ctx)
+gamma = data['arg:bn2a_branch1_gamma'].reshape((1, 256, 1, 1)).as_in_context(ctx)
 
-x = mx.nd.arange(256 * 56 * 56).reshape((1, 256, 56, 56)).astype(np.float32)
+x = mx.nd.arange(256 * 56 * 56).reshape((1, 256, 56, 56)).astype(np.float32).as_in_context(ctx)
 f = 1.0 / mx.nd.sqrt(mvar + 1e-5)
 
 USING_DIV = True
